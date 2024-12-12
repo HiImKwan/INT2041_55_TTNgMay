@@ -7,7 +7,7 @@ var url = 'https://newsapi.org/v2/everything?' +
     'q=' + q +
     '&language=en&' +
     'domains=cnn.com&' +
-    'pageSize=20&' +
+    'pageSize=10&' +
     'page=' + page + 
     '&sortBy=popularity&' +
     'apiKey=367f7e09faef4bcd9cb9eab69cf5cad8';
@@ -16,7 +16,7 @@ var req = new Request(url);
 
 let a = await fetch(req)
 let response = await a.json()
-console.log(JSON.stringify(response))
+// console.log(JSON.stringify(response))
 
 let str = ""
 for (let item of response.articles) {
@@ -38,7 +38,7 @@ search.addEventListener("click", (e)=>{
     currentQuery = query
     fetchNews(1, query) 
 })
-console.log(JSON.stringify(response))
+// console.log(JSON.stringify(response))
 
 
 previous.addEventListener("click", (e)=>{
@@ -53,14 +53,15 @@ next.addEventListener("click", (e)=>{
     currentPage = currentPage + 1;
     fetchNews(currentPage, currentQuery) 
 })
+
 document.addEventListener("click", (e) => {
     if (e.target.id === "read") {
-        e.preventDefault();
+        // e.preventDefault();
 
         const articleUrl = e.target.href;
         console.log("Navigating to article:", articleUrl);
 
-        window.open(`article.html?url=${encodeURIComponent(articleUrl)}`, "_blank");
+        // window.open(`article.html?url=${encodeURIComponent(articleUrl)}`, "_blank");
     }
 });
 
