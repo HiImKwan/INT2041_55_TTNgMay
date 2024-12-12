@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Dyslexic:wght@400;700&display=swap');
+
 * {
     margin: 0;
     padding: 0;
@@ -44,7 +46,7 @@ body {
     margin-right: 40px;
 }
 
-.nav ul li a {
+.nav ul li a{
     color: black;
     text-decoration: none;
 }
@@ -97,8 +99,6 @@ body {
 #dyslexia-friendly:hover {
     background-color: #68a8bb;
 }
-
-@import url('https://fonts.googleapis.com/css2?family=Open+Dyslexic:wght@400;700&display=swap');
 
 .dyslexia-friendly {
     font-family: 'OpenDyslexic', sans-serif;
@@ -168,7 +168,7 @@ body {
 .text-options {
     position: fixed;
     top: 20%;
-    right: 5%;
+    right: 3%;
     background-color: #ffffff;
     padding: 20px;
     border: 1px solid #ddd;
