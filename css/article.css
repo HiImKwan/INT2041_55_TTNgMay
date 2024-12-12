@@ -28,9 +28,13 @@ body {
     align-items: center;
 }
 
-.logo {
-    font-size: 1.5rem;
-    margin: 0;
+.article-container {
+    width: 90%;
+    margin-left: 10%;
+    max-width: 1200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .nav ul {
@@ -57,6 +61,10 @@ body {
 
 .main {
     padding: 20px;
+}
+
+.article {
+    background-color: white;
 }
 
 #article-title {
@@ -244,6 +252,65 @@ h5, h1, p {
     margin: 0px !important;
 }
 
+/* Style for the range input */
+#reading-speed {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 8px;
+    background: #d3cccc;
+    border-radius: 5px ;
+    outline: none;
+    transition: background 0.3s ease;
+}
+
+/* Style for the round knob */
+#reading-speed::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background: #0078d4;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+/* Hover effect on the round knob */
+#reading-speed::-webkit-slider-thumb:hover {
+    background: #005a9e;
+}
+
+/* Style for the knob in Firefox */
+#reading-speed::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    background: #0078d4;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+/* Hover effect for Firefox */
+#reading-speed::-moz-range-thumb:hover {
+    background: #005a9e;
+}
+
+/* For the slider in other browsers */
+#reading-speed::-ms-thumb {
+    width: 20px;
+    height: 20px;
+    background: #0078d4;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+/* Hover effect for other browsers */
+#reading-speed::-ms-thumb:hover {
+    background: #005a9e;
+}
+
+
 /* Dark Mode */
 body.dark-mode {
     background-color: #121212;
@@ -340,4 +407,3 @@ select.dark-mode option {
 .article p {
     color: inherit;
 }
-

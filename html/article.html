@@ -17,7 +17,7 @@
 <body>
     <header class="header">
         <div class="container">
-            <h1 class="logo">Dyslexia News</h1>
+            <h1>Dyslexia News</h1>
             <nav class="nav">
                 <ul>
                     <li><a href="\html\home.html">Home</a></li>
@@ -27,7 +27,7 @@
         </div>
     </header>
 
-    <div class="container">
+    <div class="article-container">
         <div class="article">
             <div class="mt-4">
                 <h1 id="article-title">Loading Article...</h1>
@@ -38,16 +38,17 @@
         </div>
         <div class="text-options mt-4" id="text-options">
             <h5>Settings</h5>
-            <label for="background-select" class="form-label">Background Color:</label>
             <button id="dark-mode-toggle" class="btn">Dark Mode</button>
-
+            <label for="background-select" class="form-label">Background Color:</label>
             <select id="background-select" class="form-select mb-3">
                 <option value="default">Default (White)</option>
                 <option value="cream">Cream</option>
                 <option value="lightgray">Light Gray</option>
-                <option value="black">Black with White Text</option>
             </select>
-            <button id="high-contrast-mode-toggle" class="btn">High Contrast Mode</button>
+            <label for="voice-select" class="form-label">Voice:</label>
+            <select id="voice-select" class="form-select mb-3"></select>
+            <label for="reading-speed" class="form-label">Reading Speed</label>
+            <input id="reading-speed" type="range" min="0.5" max="2.0" step="0.1" value="1.0">
             <h5>Text size</h5>
             <div class="font-size-control">
                 <button id="decrease-font-size" class="btn">-</button>
@@ -71,7 +72,7 @@
         </div>
     </div>
     <script src="\js\article.js"></script>
-    <script src="\js\setting.js"></script>
+    <script src="\js\voiceChange.js"></script>
 </body>
 
 </html>

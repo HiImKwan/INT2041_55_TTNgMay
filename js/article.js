@@ -6,6 +6,7 @@ let sentences = [];
 let currentLineIndex = 0;
 let lineByLineMode = false;
 let isReading = false;
+let readingSpeed = 1.0;
 
 if (!articleUrl) {
     document.body.innerHTML = "<p>No article URL provided.</p>";
@@ -45,6 +46,7 @@ function renderArticleContent() {
 function readAloud(text) {
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.lang = 'en-US';
+    utterance.rate = readingSpeed;
     utterance.onend = () => {
         if (currentLineIndex < sentences.length - 1) {
             currentLineIndex++;
@@ -72,6 +74,12 @@ function startSpeech() {
         readAloud(sentences[currentLineIndex]);
     }
 }
+
+// Update reading speed function
+document.getElementById("reading-speed").addEventListener("input", (event) => {
+    readingSpeed = parseFloat(event.target.value);
+    document.getElementById("speed-label").textContent = `${readingSpeed}x`;
+});
 
 // Stop Speech Button Event Listener
 document.getElementById("stop-speech").addEventListener("click", stopSpeech);
@@ -130,3 +138,58 @@ document.getElementById("next-line").addEventListener("click", () => {
         renderArticleContent();
     }
 });
+
+document.getElementById('dark-mode-toggle').addEventListener('click', function () {
+    const isDarkMode = document.body.classList.toggle('dark-mode');
+    document.querySelector('.header').classList.toggle('dark-mode');
+    document.querySelectorAll('.nav ul li a').forEach(el => el.classList.toggle('dark-mode'));
+    document.querySelectorAll('.article').forEach(el => el.classList.toggle('dark-mode'));
+    document.querySelectorAll('.btn').forEach(el => el.classList.toggle('dark-mode'));
+    document.querySelector('.text-options').classList.toggle('dark-mode');
+    
+    // Apply dark mode to article title and content
+    document.getElementById('article-title').classList.toggle('dark-mode');
+    document.getElementById('article-content').classList.toggle('dark-mode');
+
+    localStorage.setItem('dark-mode', isDarkMode ? 'enabled' : 'disabled');
+    if(isDarkMode) {
+        document.body.style.backgroundColor = '';
+        document.body.style.color = '';
+        document.getElementById('background-select').value = 'default';
+    }
+});
+
+// Load user preference
+if (localStorage.getItem('dark-mode') === 'enabled') {
+    document.body.classList.add('dark-mode');
+    document.querySelector('.header').classList.add('dark-mode');
+    document.querySelectorAll('.nav ul li a').forEach(el => el.classList.add('dark-mode'));
+    document.querySelectorAll('.article').forEach(el => el.classList.add('dark-mode'));
+    document.querySelectorAll('.btn').forEach(el => el.classList.add('dark-mode'));
+    document.querySelector('.text-options').classList.add('dark-mode');
+    document.getElementById('article-title').classList.add('dark-mode');
+    document.getElementById('article-content').classList.add('dark-mode');
+}
+
+// Background Color Selection
+document.getElementById('background-select').addEventListener('change', (event) => {
+    const value = event.target.value;
+    document.body.style.color = '';
+    document.body.style.backgroundColor = '';
+    switch (value) {
+        case 'default':
+            document.body.style.backgroundColor = '#ffffff';
+            document.body.style.color = '#333';
+            break;
+        case 'cream':
+            document.body.style.backgroundColor = '#fffdd0';
+            document.body.style.color = '#333';
+            break;
+        case 'lightgray':
+            document.body.style.backgroundColor = '#d3d3d3';
+            document.body.style.color = '#333';
+            break;
+    }
+});
+
+
