@@ -1,28 +1,30 @@
-document.getElementById('dark-mode-toggle').addEventListener('click', function () {
-    const isDarkMode = document.body.classList.toggle('dark-mode');
-    document.querySelector('.header').classList.toggle('dark-mode');
-    document.querySelectorAll('.nav ul li a').forEach(el => el.classList.toggle('dark-mode'));
-    document.querySelectorAll('.article').forEach(el => el.classList.toggle('dark-mode'));
-    document.querySelectorAll('.btn').forEach(el => el.classList.toggle('dark-mode'));
-    document.querySelector('.text-options').classList.toggle('dark-mode');
-    
-    // Apply dark mode to article title and content
-    document.getElementById('article-title').classList.toggle('dark-mode');
-    document.getElementById('article-content').classList.toggle('dark-mode');
+// async function saveSettings() {
+//     const token = localStorage.getItem('token');
+//     const settings = {
+//         font_size: document.getElementById('font-size').value,
+//         dark_mode: document.getElementById('dark-mode').checked,
+//         reading_speed: document.getElementById('reading-speed').value
+//     };
 
-    localStorage.setItem('dark-mode', isDarkMode ? 'enabled' : 'disabled');
-});
+//     const response = await fetch('http://localhost:5000/settings', {
+//         method: 'POST',
+//         headers: {
+//             'Content-Type': 'application/json',
+//             'Authorization': `Bearer ${token}`
+//         },
+//         body: JSON.stringify(settings)
+//     });
 
-// Load user preference
-if (localStorage.getItem('dark-mode') === 'enabled') {
-    document.body.classList.add('dark-mode');
-    document.querySelector('.header').classList.add('dark-mode');
-    document.querySelectorAll('.nav ul li a').forEach(el => el.classList.add('dark-mode'));
-    document.querySelectorAll('.article').forEach(el => el.classList.add('dark-mode'));
-    document.querySelectorAll('.btn').forEach(el => el.classList.add('dark-mode'));
-    document.querySelector('.text-options').classList.add('dark-mode');
-    document.getElementById('article-title').classList.add('dark-mode');
-    document.getElementById('article-content').classList.add('dark-mode');
+//     const data = await response.json();
+//     alert(data.message);
+// }
+
+// document.getElementById('save-settings').addEventListener('click', saveSettings);
+function logout() {
+    // Clear all localStorage data
+    localStorage.clear();
+    // Redirect to login page or home page
+    window.location.href = '/html/login.html';
 }
 
-
+document.getElementById('logout-button').addEventListener('click', logout);

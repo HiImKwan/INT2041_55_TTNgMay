@@ -1,0 +1,11 @@
+[
+    {
+        "id": 1,
+        "name": "New User",
+        "email": "newuser@example.com",
+        "password": "$2b$12$3cHYXsCnUZ5HhvWX8.KDaOZ45VI0Q5H/zfSRYa7GURPFrTiIsNgny",
+        "font_size": 18,
+        "dark_mode": false,
+        "reading_speed": 1.0
+    }
+]
