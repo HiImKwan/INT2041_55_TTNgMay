@@ -5,6 +5,7 @@ const articleTitle = params.get("title");
 let sentences = [];
 let currentLineIndex = 0;
 let lineByLineMode = false;
+let isReading = false;
 
 if (!articleUrl) {
     document.body.innerHTML = "<p>No article URL provided.</p>";
@@ -31,7 +32,7 @@ function renderArticleContent() {
 
     if (lineByLineMode) {
         contentDiv.innerHTML = sentences
-            .map((sentence, index) => 
+            .map((sentence, index) =>
                 `<p class="${index === currentLineIndex ? 'line-active' : 'line-blurred'}">${sentence}</p>`
             )
             .join("");
@@ -40,81 +41,84 @@ function renderArticleContent() {
     }
 }
 
+// Function to trigger the speech synthesis
+function readAloud(text) {
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = 'en-US';
+    utterance.onend = () => {
+        if (currentLineIndex < sentences.length - 1) {
+            currentLineIndex++;
+            renderArticleContent();
+            if (isReading) {
+                readAloud(sentences[currentLineIndex]);
+            }
+        }
+    };
+    window.speechSynthesis.speak(utterance);
+}
+
+// Stop Speech Function
+function stopSpeech() {
+    if (isReading) {
+        window.speechSynthesis.cancel();
+        isReading = false;
+    }
+}
+
+// Start Speech Function
+function startSpeech() {
+    if (!isReading && lineByLineMode && currentLineIndex < sentences.length) {
+        isReading = true;
+        readAloud(sentences[currentLineIndex]);
+    }
+}
+
+// Stop Speech Button Event Listener
+document.getElementById("stop-speech").addEventListener("click", stopSpeech);
+
+// Start Speech Button Event Listener
+document.getElementById("start-speech").addEventListener("click", startSpeech);
+
 // Font Size and Family
-// Default font size
 let fontSize = 16;
 
-// Update font size label and content style
 function updateFontSizeLabel() {
     document.getElementById("font-size-label").textContent = `${fontSize}px`;
     document.getElementById("article-content").style.fontSize = `${fontSize}px`;
 }
 
-// Decrease font size
 document.getElementById("decrease-font-size").addEventListener("click", () => {
-    if (fontSize > 12) { // Minimum font size
+    if (fontSize > 12) {
         fontSize -= 2;
         updateFontSizeLabel();
     }
 });
 
-// Increase font size
 document.getElementById("increase-font-size").addEventListener("click", () => {
-    if (fontSize < 36) { // Maximum font size
+    if (fontSize < 36) {
         fontSize += 2;
         updateFontSizeLabel();
     }
 });
 
-// Initialize with default font size
 updateFontSizeLabel();
-
 
 document.getElementById("font-family").addEventListener("change", (event) => {
     document.getElementById("article-content").style.fontFamily = event.target.value;
 });
 
-// Dyslexia-Friendly Mode
-document.getElementById("dyslexia-friendly").addEventListener("click", () => {
-    document.getElementById("article-content").style.fontFamily = "OpenDyslexic, Arial, sans-serif";
-    document.getElementById("article-content").style.fontSize = "18px";
-});
+// document.getElementById("dyslexia-friendly").addEventListener("click", () => {
+//     document.getElementById("article-content").style.fontFamily = "OpenDyslexic, Arial, sans-serif";
+//     document.getElementById("article-content").style.fontSize = "18px";
+// });
 
 // Line-by-Line Toggle
 document.getElementById("toggle-line-by-line").addEventListener("click", () => {
     lineByLineMode = !lineByLineMode;
     document.getElementById("line-nav").classList.toggle("d-none", !lineByLineMode);
+    document.getElementById("speech-button").classList.toggle("d-none", !lineByLineMode);
     renderArticleContent();
 });
-
-// Ensure line-by-line mode and active line tracking
-let textOptionsDiv = document.querySelector('.text-options');
-
-function updateControlsPosition() {
-    if (lineByLineMode) {
-        const activeLine = document.querySelector('.line-active');
-        if (activeLine) {
-            activeLine.scrollIntoView({ behavior: "smooth", block: "center" });
-        }
-    }
-}
-
-// Update line rendering and ensure controls stay with the active line
-function renderArticleContent() {
-    const contentDiv = document.getElementById("article-content");
-
-    if (lineByLineMode) {
-        contentDiv.innerHTML = sentences
-            .map((sentence, index) => 
-                `<p class="${index === currentLineIndex ? 'line-active scroll-active' : 'line-blurred'}">${sentence}</p>`
-            )
-            .join("");
-
-        updateControlsPosition(); // Ensure controls stay with the active line
-    } else {
-        contentDiv.innerText = sentences.join(" ");
-    }
-}
 
 // Navigate Lines
 document.getElementById("prev-line").addEventListener("click", () => {
@@ -130,4 +134,3 @@ document.getElementById("next-line").addEventListener("click", () => {
         renderArticleContent();
     }
 });
-

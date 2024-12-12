@@ -59,7 +59,6 @@ body {
 
 #article-title {
     font-size: 2rem;
-    margin-bottom: 20px;
     color: #333;
 }
 
@@ -107,9 +106,11 @@ body {
 }
 
 .article {
-    border: rgb(204, 215, 219) 1px solid;
+    border: #ddd 1px solid;
     border-radius: 8px;
     box-shadow: lightgray;
+    margin-top: 20px;
+    margin-bottom: 60px;
 }
 
 .line-active {
@@ -135,6 +136,7 @@ body {
 .font-size-control {
     display: flex;
     align-items: center;
+    justify-content: center;
 }
 
 .font-size-control .btn {
@@ -156,11 +158,74 @@ body {
     border: none;
     border-radius: 5px;
     font-size: 14px;
-    cursor: pointer;
+    margin: 0px !important;
 }
 
 .btn:hover {
     background: #005a9e;
+}
+
+.text-options {
+    position: fixed;
+    top: 20%;
+    right: 5%;
+    background-color: #ffffff;
+    padding: 20px;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    border-radius: 8px;
+}
+
+#line-nav {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    margin: 0px !important;
+}
+
+.form-select {
+    margin: 0px !important;
+}
+
+#dyslexia-friendly #toggle-line-by-line {
+    margin: 0px !important;
+}
+
+#prev-line {
+    width: 52px;
+}
+
+#next-line {
+    width: 52px;
+}
+
+#stop-speech {
+    padding: 8px 16px;
+    background-color: #e74c3c;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+#stop-speech:hover {
+    background-color: #c0392b;
+}
+
+#start-speech {
+    padding: 8px 16px;
+    background-color: #3dcf7a;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+#start-speech:hover {
+    background-color: #27ae60;
 }
 
   
