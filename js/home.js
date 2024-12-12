@@ -14,8 +14,8 @@ var url = 'https://newsapi.org/v2/everything?' +
 
 var req = new Request(url);
 
-let a = await fetch(req)
-let response = await a.json()
+// let a = await fetch(req)
+// let response = await a.json()
 // console.log(JSON.stringify(response))
 
 let str = ""
@@ -56,12 +56,8 @@ next.addEventListener("click", (e)=>{
 
 document.addEventListener("click", (e) => {
     if (e.target.id === "read") {
-        // e.preventDefault();
-
         const articleUrl = e.target.href;
         console.log("Navigating to article:", articleUrl);
-
-        // window.open(`article.html?url=${encodeURIComponent(articleUrl)}`, "_blank");
     }
 });
 

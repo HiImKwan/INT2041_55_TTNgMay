@@ -104,13 +104,9 @@ document.getElementById("increase-font-size").addEventListener("click", () => {
 updateFontSizeLabel();
 
 document.getElementById("font-family").addEventListener("change", (event) => {
-    document.getElementById("article-content").style.fontFamily = event.target.value;
+    // document.getElementById("article-content").style.fontFamily = event.target.value;
+    document.body.style.fontFamily = event.target.value;
 });
-
-// document.getElementById("dyslexia-friendly").addEventListener("click", () => {
-//     document.getElementById("article-content").style.fontFamily = "OpenDyslexic, Arial, sans-serif";
-//     document.getElementById("article-content").style.fontSize = "18px";
-// });
 
 // Line-by-Line Toggle
 document.getElementById("toggle-line-by-line").addEventListener("click", () => {

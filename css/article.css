@@ -228,4 +228,116 @@ body {
     background-color: #27ae60;
 }
 
-  
+.form-check {
+    margin: 0px !important;
+}
+
+.form-check-label {
+    margin: 0px !important;
+}
+
+.form-label {
+    margin: 0px !important;
+}
+
+h5, h1, p {
+    margin: 0px !important;
+}
+
+/* Dark Mode */
+body.dark-mode {
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+.header.dark-mode {
+    background-color: #1e1e1e;
+    color: #ffffff;
+}
+
+.nav ul li a.dark-mode {
+    color: #e0e0e0;
+}
+
+.nav ul li a.dark-mode:hover {
+    text-decoration: underline;
+    color: #85c6db;
+}
+
+.article.dark-mode {
+    background-color: #1e1e1e;
+    border-color: #333333;
+    color: #e0e0e0;
+}
+
+.text-options.dark-mode,
+.toolbox.dark-mode {
+    background-color: #1e1e1e;
+    border-color: #333333;
+    color: #e0e0e0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+}
+
+.btn.dark-mode {
+    background-color: #333333;
+    color: #e0e0e0;
+}
+
+.btn.dark-mode:hover {
+    background-color: #444444;
+}
+
+#dyslexia-friendly.dark-mode:hover {
+    background-color: #68a8bb;
+}
+
+#start-speech.dark-mode {
+    background-color: #27ae60;
+    color: #ffffff;
+}
+
+#start-speech.dark-mode:hover {
+    background-color: #1e8449;
+}
+
+#stop-speech.dark-mode {
+    background-color: #c0392b;
+    color: #ffffff;
+}
+
+#stop-speech.dark-mode:hover {
+    background-color: #922b21;
+}
+
+select.dark-mode,
+input.dark-mode {
+    background-color: #333333;
+    color: #e0e0e0;
+    border: 1px solid #444444;
+}
+
+select.dark-mode option {
+    background-color: #333333;
+    color: #e0e0e0;
+}
+
+.article.dark-mode {
+    background-color: #1f1f1f;
+    border-color: #333;
+    color: #e0e0e0;
+}
+
+#article-title.dark-mode {
+    color: #ffffff;
+}
+
+#article-content.dark-mode {
+    color: #e0e0e0;
+    background-color: #2c2c2c;
+}
+
+.article h1,
+.article p {
+    color: inherit;
+}
+
