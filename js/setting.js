@@ -45,11 +45,6 @@ function enableDarkMode() {
     console.log(tempSettings);
 }
 
-// function disabledDarkMode() {
-
-// }
-    
-
 document.getElementById('dark-mode-toggle').addEventListener('click', function () {
     enableDarkMode();
 });
@@ -80,34 +75,12 @@ document.getElementById('save-settings').addEventListener('click', () => {
         reading_speed: tempSettings.readingSpeed,
     };
 
-    // fetch('http://localhost:8080/settings', {
-    //     method: 'POST',
-    //     headers: {
-    //         'Content-Type': 'application/json',
-    //         'Authorization': `Bearer ${token}`,
-    //     },
-    //     body: JSON.stringify(updatedSettings),
-    // })
-    // .then(response => response.json())
-    // .then(data => {
-    //     alert('Settings saved successfully');
-    // })
-    // .catch(error => console.error('Error saving settings:', error));
-    
-
-
     alert('Settings saved!');
 
 });
 
-// function updateSettings(font_size, dark_mode, reading_speed, font_family) {
-
-// }
-
-
 // Logout button
 document.getElementById('logout-button').addEventListener('click', () => {
-    // localStorage.clear();
     window.location.href = '/html/login.html';
 });
 
