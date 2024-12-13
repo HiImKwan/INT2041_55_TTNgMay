@@ -10,12 +10,12 @@ const fetchNews = async (page, q) => {
         'pageSize=12&' +
         'page=' + page +
         '&sortBy=popularity&' +
-        'apiKey=367f7e09faef4bcd9cb9eab69cf5cad8';
+        '';
 
     var req = new Request(url);
 
-    // let a = await fetch(req)
-    // let response = await a.json()
+    let a = await fetch(req)
+    let response = await a.json()
     // console.log(JSON.stringify(response))
 
     let str = ""
@@ -55,16 +55,44 @@ document.getElementById("next").addEventListener("click", (e) => {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
+    // Fetch user settings
+    // fetch('/settings', {
+    //     headers: {
+    //         'Authorization': `Bearer ${token}`,
+    //     },
+    // })
+    //     .then(response => response.json())
+    //     .then(settings => {
+    //         // Apply settings like dark mode, font size, etc.
+    //         if (settings.dark_mode) {
+    //             enableDarkMode();
+    //         }
+    //         document.body.style.fontSize = `${settings.font_size}px`;
+    //         document.body.style.lineHeight = settings.reading_speed;
+    //     })
+    //     .catch(error => console.error('Error fetching settings:', error));
+
     const token = localStorage.getItem('token');
     console.log(token);
 
     if (token) {
         try {
             const decodedToken = jwt_decode(token);
-            const userName = decodedToken.sub.name;
             console.log(decodedToken);
-            console.log(userName);
+            const userName = decodedToken.sub.name;
+            const userEmail = decodedToken.sub.email || 'guest';
+            const userKey = `settings_${userEmail}`;
+            const userSettings = JSON.parse(localStorage.getItem(userKey)) || {};
             document.querySelector('.main h2').textContent = `Hi ${userName}, welcome to Dyslexi News`;
+            if (userSettings.darkMode) {
+                enableDarkMode();
+                console.log(userSettings);
+            }
+            // Load font family setting
+            if (userSettings.fontFamily) {
+                document.body.style.fontFamily = userSettings.fontFamily;
+            }
+
         } catch (error) {
             console.error('Error decoding token:', error);
             document.querySelector('.main h2').textContent = 'Hi Guest, welcome to Dyslexi News';
@@ -74,18 +102,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-document.getElementById("searchInput").addEventListener("input", (e) => {
-    let inputText = e.target.value;
-    const matchedSuggestions = suggestionsList.filter(word => word.includes(inputText));
-
-    if (matchedSuggestions.length > 0) {
-        const suggestionItems = matchedSuggestions.map(s => `<li class="list-group-item">${s}</li>`).join("");
-        document.getElementById("suggestions").innerHTML = suggestionItems;
-        document.getElementById("suggestions").style.display = "block";
-    } else {
-        document.getElementById("suggestions").style.display = "none";
-    }
-});
+function enableDarkMode() {
+    const isDarkMode = document.body.classList.toggle('dark-mode');
+    document.querySelector('.header').classList.toggle('dark-mode');
+    document.querySelectorAll('.nav ul li a').forEach(el => el.classList.toggle('dark-mode'));
+    document.querySelectorAll('.article').forEach(el => el.classList.toggle('dark-mode'));
+    document.querySelectorAll('.btn').forEach(el => el.classList.toggle('dark-mode'));
+}
 
 // Initialize speech recognition
 const recognition = new webkitSpeechRecognition();
@@ -117,4 +140,5 @@ recognition.onerror = (event) => {
 recognition.onend = () => {
     console.log("Speech recognition has ended.");
 };
+
 

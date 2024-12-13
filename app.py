@@ -67,9 +67,7 @@ def signup():
         "name": name,
         "email": email,
         "password": hashed_password,
-        "font_size": 18,
         "dark_mode": False,
-        "reading_speed": 1.0
     }
     
     users.append(new_user)
@@ -96,13 +94,15 @@ def login():
 @app.route('/settings', methods=['GET'])
 @jwt_required()
 def get_settings():
+    print("User Settings")
     current_user_info = get_jwt_identity()
     user = get_user_by_id(current_user_info['id'])
 
     return jsonify({
         "font_size": user['font_size'],
         "dark_mode": user['dark_mode'],
-        "reading_speed": user['reading_speed']
+        "reading_speed": user['reading_speed'],
+        "font_family": user['font_family']
     })
 
 # Save User Settings Route
@@ -126,7 +126,8 @@ def save_settings():
     data = request.get_json()
     users[user_index]['font_size'] = data.get('font_size', users[user_index]['font_size'])
     users[user_index]['dark_mode'] = data.get('dark_mode', users[user_index]['dark_mode'])
-    users[user_index]['reading_speed'] = data.get('reading_speed', users[user_index]['reading_speed'])
+    users[user_index]['reading_speed'] = data.get('reading_speed', users[user_index]['reading_speed']),
+    users[user_index]['font_family'] = data.get('font_family', users[user_index]['font_family']),
 
     save_users(users)
 

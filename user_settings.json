@@ -1,0 +1,9 @@
+[
+    {
+        "user_email": "newuser@example.com",
+        "settings": {
+            "fontFamily": "Helvetica",
+            "dark_mode": true
+        }
+    }
+]

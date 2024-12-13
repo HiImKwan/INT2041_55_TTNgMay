@@ -4,8 +4,20 @@
         "name": "New User",
         "email": "newuser@example.com",
         "password": "$2b$12$3cHYXsCnUZ5HhvWX8.KDaOZ45VI0Q5H/zfSRYa7GURPFrTiIsNgny",
-        "font_size": 18,
+        "font_size": "18px",
         "dark_mode": false,
-        "reading_speed": 1.0
+        "reading_speed": [
+            300
+        ],
+        "font_family": [
+            "Helvetica"
+        ]
+    },
+    {
+        "id": 2,
+        "name": "Qu\u00e2n",
+        "email": "nhimcoi262@gmail.com",
+        "password": "$2b$12$/Mbkocv8suMDjUXAdpM3UuGHqNCnMHGSoWBU9ix60aPHukDEU8dr2",
+        "dark_mode": false
     }
 ]

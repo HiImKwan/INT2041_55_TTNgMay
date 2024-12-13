@@ -6,6 +6,34 @@
     box-sizing: border-box;
 }
 
+.full-height {
+    height: 100%;
+}
+
+.setting-container {
+    display: flex;
+    justify-content: center;
+}
+
+#setting-option {
+    margin-top: 50px;
+    width: 40%;
+    border: #ddd 1px solid;
+    border-radius: 8px;
+    box-shadow: lightgray;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+}
+
+
+html {
+    height: 100%;
+}
+
+body {
+    min-height: 100%;
+}
+
 body {
     font-family: Arial, sans-serif;
     line-height: 1.6;
@@ -20,10 +48,18 @@ body {
 }
 
 .container {
+    width: 90%;
     margin: auto;
+    max-width: 1200px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.flex-column {
+    width: 1200px;
+    align-items: center;
+    justify-content: center;
 }
 
 .nav ul {
@@ -39,7 +75,7 @@ body {
     margin-right: 40px;
 }
 
-.nav ul li a {
+.nav ul li a{
     color: black;
     text-decoration: none;
 }
@@ -52,42 +88,44 @@ body {
     padding: 20px;
 }
 
-.news-section h2 {
-    text-align: center;
-    color: #444;
+.dyslexia-friendly {
+    font-family: 'OpenDyslexic', sans-serif;
+    font-size: 18px;
 }
 
-.news-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 20px;
-    padding: 20px;
+#dark-mode-toggle {
+    border: #ddd 1px solid;
 }
 
-.news-grid button {
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    padding: 15px;
-    text-align: center;
-    font-weight: bold;
-    text-decoration: none;
-    color: #333;
-    transition: transform 0.3s, background-color 0.3s;
-}
-
-.news-grid button:hover {
-    background-color: #007BFF;
+.btn {
+    padding: 5px 10px;
+    background: #0078d4;
     color: #fff;
-    transform: scale(1.05);
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    margin: 0px !important;
 }
 
-.card {
-    padding-top: 12px;
+.btn:hover {
+    background: #005a9e;
 }
 
-.nav .d-flex {
-    margin-left: 20px;
+.form-label {
+    margin: 0px !important;
+}
+
+h5, h1, p {
+    margin: 0px !important;
+}
+
+.button {
+    display: flex;
+    justify-content: center;
+}
+
+#save-settings {
+    margin: 0px !important;
 }
 
 /* Dark Mode */

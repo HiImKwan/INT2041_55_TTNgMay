@@ -2,6 +2,8 @@ const params = new URLSearchParams(window.location.search);
 const articleUrl = params.get("url");
 const articleTitle = params.get("title");
 
+
+const tempSettings = {};
 let sentences = [];
 let currentLineIndex = 0;
 let lineByLineMode = false;
@@ -111,11 +113,6 @@ document.getElementById("increase-font-size").addEventListener("click", () => {
 
 updateFontSizeLabel();
 
-document.getElementById("font-family").addEventListener("change", (event) => {
-    // document.getElementById("article-content").style.fontFamily = event.target.value;
-    document.body.style.fontFamily = event.target.value;
-});
-
 // Line-by-Line Toggle
 document.getElementById("toggle-line-by-line").addEventListener("click", () => {
     lineByLineMode = !lineByLineMode;
@@ -139,37 +136,73 @@ document.getElementById("next-line").addEventListener("click", () => {
     }
 });
 
-document.getElementById('dark-mode-toggle').addEventListener('click', function () {
+document.getElementById('font-family').addEventListener('change', (event) => {
+    const selectedFont = event.target.value;
+    document.body.style.fontFamily = selectedFont;
+    tempSettings.fontFamily = selectedFont;
+    console.log(tempSettings);
+    const token = localStorage.getItem('token');
+    const decodedToken = jwt_decode(token);
+    const userEmail = decodedToken.sub.email || 'guest';
+    const userKey = `settings_${userEmail}`;
+
+    const userSettings = JSON.parse(localStorage.getItem(userKey)) || {};
+    Object.assign(userSettings, tempSettings); // Merge temporary settings into saved settings
+
+    localStorage.setItem(userKey, JSON.stringify(userSettings));
+});
+
+function enableDarkMode() {
     const isDarkMode = document.body.classList.toggle('dark-mode');
     document.querySelector('.header').classList.toggle('dark-mode');
     document.querySelectorAll('.nav ul li a').forEach(el => el.classList.toggle('dark-mode'));
     document.querySelectorAll('.article').forEach(el => el.classList.toggle('dark-mode'));
     document.querySelectorAll('.btn').forEach(el => el.classList.toggle('dark-mode'));
     document.querySelector('.text-options').classList.toggle('dark-mode');
-    
-    // Apply dark mode to article title and content
     document.getElementById('article-title').classList.toggle('dark-mode');
     document.getElementById('article-content').classList.toggle('dark-mode');
-
-    localStorage.setItem('dark-mode', isDarkMode ? 'enabled' : 'disabled');
+    tempSettings.darkMode = isDarkMode;
     if(isDarkMode) {
         document.body.style.backgroundColor = '';
         document.body.style.color = '';
         document.getElementById('background-select').value = 'default';
     }
+    console.log(tempSettings);
+}
+
+document.getElementById('dark-mode-toggle').addEventListener('click', function () {
+    const token = localStorage.getItem('token');
+    const decodedToken = jwt_decode(token);
+    const userEmail = decodedToken.sub.email || 'guest';
+    const userKey = `settings_${userEmail}`;
+    const userSettings = JSON.parse(localStorage.getItem(userKey)) || {};
+    enableDarkMode();
+    Object.assign(userSettings, tempSettings);
+    localStorage.setItem(userKey, JSON.stringify(userSettings));
 });
 
-// Load user preference
-if (localStorage.getItem('dark-mode') === 'enabled') {
-    document.body.classList.add('dark-mode');
-    document.querySelector('.header').classList.add('dark-mode');
-    document.querySelectorAll('.nav ul li a').forEach(el => el.classList.add('dark-mode'));
-    document.querySelectorAll('.article').forEach(el => el.classList.add('dark-mode'));
-    document.querySelectorAll('.btn').forEach(el => el.classList.add('dark-mode'));
-    document.querySelector('.text-options').classList.add('dark-mode');
-    document.getElementById('article-title').classList.add('dark-mode');
-    document.getElementById('article-content').classList.add('dark-mode');
-}
+document.addEventListener('DOMContentLoaded', () => {
+    const token = localStorage.getItem('token');
+    if (token) {
+        try {
+            const decodedToken = jwt_decode(token);
+            const userEmail = decodedToken.sub.email || 'guest';
+            const userKey = `settings_${userEmail}`;
+            const userSettings = JSON.parse(localStorage.getItem(userKey)) || {};
+            console.log(userSettings)
+            if (userSettings.darkMode) {
+                enableDarkMode();
+            }
+            // Load font family setting
+            if (userSettings.fontFamily) {
+                document.body.style.fontFamily = userSettings.fontFamily;
+                document.getElementById('font-family').value = userSettings.fontFamily;
+            }
+        } catch (error) {
+            console.error('Error decoding token:', error);
+        }
+    }
+});
 
 // Background Color Selection
 document.getElementById('background-select').addEventListener('change', (event) => {
@@ -191,5 +224,3 @@ document.getElementById('background-select').addEventListener('change', (event) 
             break;
     }
 });
-
-

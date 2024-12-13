@@ -19,6 +19,8 @@ document.querySelector(".login-form").addEventListener("submit", async function(
         if (response.ok && data.access_token) {
             localStorage.setItem('token', data.access_token);
             window.location.href = "home.html";
+
+            
         } else {
             alert(data.message || "Login failed. Please try again.");
         }
